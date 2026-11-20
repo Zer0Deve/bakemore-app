@@ -1,6 +1,6 @@
 # Bake More
 
-A responsive React + Tailwind storefront for a small-batch cake shop. The catalog, search, filters, cart, and demo checkout work without a backend. Google sign-in and cross-device profile/cart/order history use Firebase Authentication and Cloud Firestore.
+A responsive React + Tailwind storefront for a small-batch cake shop. Browse cakes by occasion, style, or flavour; refine the catalog by delivery, price, and dietary preference; search, sort, mark favourites, and use the cart and demo checkout without a backend. Google sign-in and cross-device profile/cart/order history use Firebase Authentication and Cloud Firestore.
 
 ## Run locally
 

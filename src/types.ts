@@ -7,6 +7,13 @@ export type Product = {
   rating: string
   image: string
   badge?: string
+  occasions: string[]
+  styles: string[]
+  flavours: string[]
+  delivery: string[]
+  dietary: string[]
+  weight: string
+  compareAt?: number
 }
 
 export type CartLine = { productId: string; quantity: number }

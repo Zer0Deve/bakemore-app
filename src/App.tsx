@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { onAuthStateChanged, signInWithPopup, signOut, type User } from 'firebase/auth'
 import {
-  ArrowDown,
   ArrowRight,
   CakeSlice,
   Check,
@@ -13,11 +12,11 @@ import {
   Search,
   ShoppingBag,
   Sparkles,
-  Star,
   UserRound,
   X,
 } from 'lucide-react'
-import { categories, products } from './data/products'
+import { products } from './data/products'
+import ProductCatalog from './components/ProductCatalog'
 import { loadAccount, saveAccountCart, saveAccountOrder } from './lib/account'
 import { auth, firebaseConfigured, googleProvider } from './lib/firebase'
 import type { CartLine, Order, Product } from './types'
@@ -60,13 +59,10 @@ function App() {
   const [accountReady, setAccountReady] = useState(false)
   const [cart, setCart] = useState<CartLine[]>(readGuestCart)
   const [orders, setOrders] = useState<Order[]>(readGuestOrders)
-  const [category, setCategory] = useState('All cakes')
   const [search, setSearch] = useState('')
   const [panel, setPanel] = useState<'cart' | 'account' | null>(null)
   const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
-  const [saved, setSaved] = useState<string[]>([])
-  const [showAll, setShowAll] = useState(false)
 
   useEffect(() => {
     if (!auth) return
@@ -120,16 +116,6 @@ function App() {
     return () => window.clearTimeout(timeout)
   }, [notice])
 
-  const visibleProducts = useMemo(() => {
-    const query = search.trim().toLowerCase()
-    return products.filter((product) => {
-      const matchesCategory = category === 'All cakes' || product.category === category
-      const matchesSearch = !query || `${product.name} ${product.description} ${product.category}`.toLowerCase().includes(query)
-      return matchesCategory && matchesSearch
-    })
-  }, [category, search])
-
-  const displayedProducts = showAll ? visibleProducts : visibleProducts.slice(0, 4)
   const cartCount = cart.reduce((total, line) => total + line.quantity, 0)
   const subtotal = cart.reduce((total, line) => {
     const product = products.find((item) => item.id === line.productId)
@@ -243,7 +229,7 @@ function App() {
           </a>
 
           <nav className="hidden items-center gap-8 text-[13px] font-medium text-stone-600 md:flex">
-            <a className="transition hover:text-berry" href="#cakes">Shop cakes</a>
+            <a className="transition hover:text-berry" href="#browse">Explore cakes</a>
             <a className="transition hover:text-berry" href="#story">Our little story</a>
             <a className="transition hover:text-berry" href="#promise">The Bake More promise</a>
           </nav>
@@ -251,7 +237,7 @@ function App() {
           <div className="flex items-center gap-2">
             <label className="hidden h-10 items-center gap-2 rounded-full border border-[#e9ded4] bg-white px-3 text-stone-400 lg:flex">
               <Search size={16} />
-              <input aria-label="Search cakes" value={search} onChange={(event) => { setSearch(event.target.value); document.getElementById('cakes')?.scrollIntoView({ behavior: 'smooth' }) }} placeholder="Find your sweet thing" className="w-40 bg-transparent text-xs text-ink outline-none placeholder:text-stone-400" />
+              <input aria-label="Search cakes" value={search} onChange={(event) => { setSearch(event.target.value); document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }) }} placeholder="Find your sweet thing" className="w-40 bg-transparent text-xs text-ink outline-none placeholder:text-stone-400" />
             </label>
             <button onClick={() => setPanel('account')} aria-label="Your profile" className="grid h-10 w-10 place-items-center rounded-full text-ink transition hover:bg-blush">
               {user?.photoURL ? <img src={user.photoURL} alt="" className="h-8 w-8 rounded-full object-cover" /> : <UserRound size={20} />}
@@ -273,7 +259,7 @@ function App() {
               <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.2em] backdrop-blur-sm"><Sparkles size={13} /> Baked for your best days</span>
               <h1 className="serif max-w-[570px] text-[44px] font-medium leading-[1.05] tracking-[-.04em] sm:text-[64px]">A little more <em className="font-medium text-[#f5c5b7]">cake.</em><br />A lot more joy.</h1>
               <p className="mt-5 max-w-[390px] text-sm leading-6 text-white/85 sm:text-base">For the big milestones, the tiny wins, and the Tuesdays that deserve a treat.</p>
-              <a href="#cakes" className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-[13px] font-bold text-ink transition hover:bg-[#f9e9df]">Find your cake <ArrowRight size={16} /></a>
+              <a href="#browse" className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-[13px] font-bold text-ink transition hover:bg-[#f9e9df]">Find your cake <ArrowRight size={16} /></a>
               <div className="absolute bottom-7 left-7 flex items-center gap-2 text-[10px] tracking-wide text-white/80 sm:left-14"><Clock3 size={14} /> Made fresh, delivered with love</div>
             </div>
             <div className="absolute bottom-7 right-7 hidden rounded-2xl bg-white/90 p-3 pr-5 shadow-lg backdrop-blur sm:flex sm:items-center sm:gap-3">
@@ -291,60 +277,7 @@ function App() {
           <p className="max-w-[360px] text-sm leading-6 text-stone-500">Small-batch bakes, joyful flavours, and the kind of cake that makes everyone ask for one more slice.</p>
         </section>
 
-        <section id="cakes" className="bg-[#f8f2ec] py-12 sm:py-16">
-          <div className="page-shell">
-            <div className="mb-7 flex flex-wrap items-end justify-between gap-5">
-              <div>
-                <p className="mb-2 text-[10px] font-bold uppercase tracking-[.22em] text-berry">The good stuff</p>
-                <h2 className="serif text-3xl tracking-[-.025em] sm:text-[40px]">Cakes worth celebrating</h2>
-              </div>
-              <span className="text-xs text-stone-500">{visibleProducts.length} little delights</span>
-            </div>
-
-            <label className="mb-5 flex h-11 items-center gap-2 rounded-full border border-[#e9ded4] bg-white px-4 text-stone-400 lg:hidden">
-              <Search size={16} />
-              <input aria-label="Search cakes" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Find your sweet thing" className="w-full bg-transparent text-sm text-ink outline-none placeholder:text-stone-400" />
-            </label>
-            <div className="hide-scrollbar mb-7 flex gap-2 overflow-x-auto pb-1">
-              {categories.map((item) => (
-                <button key={item} onClick={() => setCategory(item)} className={`shrink-0 rounded-full px-5 py-2.5 text-xs font-semibold transition ${category === item ? 'bg-ink text-white' : 'border border-[#e7dcd3] bg-white text-stone-600 hover:border-berry hover:text-berry'}`}>{item}</button>
-              ))}
-            </div>
-
-            {displayedProducts.length ? (
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-                {displayedProducts.map((product) => (
-                  <article key={product.id} className="group overflow-hidden rounded-[18px] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_34px_rgba(74,49,38,.10)]">
-                    <div className="relative aspect-[1.08/1] overflow-hidden bg-[#eee5dd]">
-                      <img src={product.image} alt={product.name} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-                      {product.badge && <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-bold text-berry shadow-sm">{product.badge}</span>}
-                      <button onClick={() => setSaved((current) => current.includes(product.id) ? current.filter((id) => id !== product.id) : [...current, product.id])} aria-label={`${saved.includes(product.id) ? 'Remove' : 'Save'} ${product.name}`} className={`absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/95 transition ${saved.includes(product.id) ? 'text-berry' : 'text-stone-500 hover:text-berry'}`}><Heart size={16} fill={saved.includes(product.id) ? 'currentColor' : 'none'} /></button>
-                    </div>
-                    <div className="p-3.5 sm:p-4">
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
-                        <span className="text-[9px] font-bold uppercase tracking-[.14em] text-caramel">{product.category}</span>
-                        <span className="flex items-center gap-1 text-[10px] font-semibold text-stone-500"><Star size={11} fill="#d58b39" stroke="#d58b39" /> {product.rating}</span>
-                      </div>
-                      <h3 className="serif min-h-[25px] text-[17px] font-semibold leading-tight sm:text-[20px]">{product.name}</h3>
-                      <p className="mt-1.5 min-h-[30px] text-[10px] leading-4 text-stone-500 sm:text-[11px]">{product.description}</p>
-                      <div className="mt-3 flex items-center justify-between gap-1">
-                        <span className="text-sm font-bold">{money.format(product.price)}</span>
-                        <button onClick={() => addToCart(product)} className="inline-flex items-center gap-1.5 rounded-full bg-[#f8eee8] px-3 py-2 text-[10px] font-bold text-berry transition hover:bg-berry hover:text-white sm:px-4 sm:text-[11px]"><Plus size={13} /> Add</button>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-2xl bg-white px-6 py-14 text-center text-sm text-stone-500">No cakes found. Try another flavour or category.</div>
-            )}
-            {visibleProducts.length > 4 && (
-              <div className="mt-9 text-center">
-                <button onClick={() => setShowAll((value) => !value)} className="inline-flex items-center gap-2 rounded-full border border-[#d9c9bd] bg-white px-6 py-3 text-xs font-bold transition hover:border-berry hover:text-berry">{showAll ? 'Show a little less' : 'See all the good stuff'} <ArrowDown size={14} className={showAll ? 'rotate-180' : ''} /></button>
-              </div>
-            )}
-          </div>
-        </section>
+        <ProductCatalog search={search} onSearchChange={setSearch} onAdd={addToCart} />
 
         <section id="promise" className="page-shell grid gap-5 py-12 sm:grid-cols-3 sm:py-16">
           {[
@@ -413,7 +346,7 @@ function App() {
                   <span className="grid h-16 w-16 place-items-center rounded-full bg-[#f8e9e3] text-berry"><ShoppingBag size={24} /></span>
                   <h3 className="serif mt-5 text-2xl">Your bag is taking a breather</h3>
                   <p className="mt-2 text-sm text-stone-500">Add a cake to get the good times rolling.</p>
-                  <button onClick={() => { setPanel(null); document.getElementById('cakes')?.scrollIntoView({ behavior: 'smooth' }) }} className="mt-6 rounded-full bg-ink px-6 py-3 text-xs font-bold text-white">Explore cakes</button>
+                  <button onClick={() => { setPanel(null); document.getElementById('browse')?.scrollIntoView({ behavior: 'smooth' }) }} className="mt-6 rounded-full bg-ink px-6 py-3 text-xs font-bold text-white">Explore cakes</button>
                 </div>
               )}
             </aside>
