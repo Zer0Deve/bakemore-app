@@ -1,0 +1,70 @@
+/* The hero keeps its image as a cover background with a readable text overlay. */
+.hero-section {
+  @apply pt-6 sm:pt-8;
+}
+
+.hero-card {
+  @apply relative min-h-[440px] overflow-hidden rounded-[26px] bg-[#eee1d4] sm:min-h-[490px];
+}
+
+.hero-image,
+.hero-shade {
+  @apply absolute inset-0 h-full w-full;
+}
+
+.hero-image {
+  @apply object-cover object-center;
+}
+
+.hero-shade {
+  background: linear-gradient(90deg, rgb(40 29 24 / 80%), rgb(40 29 24 / 40%) 55%, transparent);
+}
+
+.hero-copy {
+  @apply relative flex min-h-[440px] max-w-[620px] flex-col items-start justify-center px-7 py-12 text-white sm:min-h-[490px] sm:px-14;
+}
+
+.hero-eyebrow {
+  @apply mb-5 inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.2em] backdrop-blur-sm;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  @apply max-w-[570px] text-[44px] font-medium leading-[1.05] tracking-[-.04em] sm:text-[64px];
+}
+
+.hero-title em {
+  @apply font-medium text-[#f5c5b7];
+}
+
+.hero-description {
+  @apply mt-5 max-w-[390px] text-sm leading-6 text-white/85 sm:text-base;
+}
+
+.hero-cta {
+  @apply mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-[13px] font-bold text-ink transition hover:bg-[#f9e9df];
+}
+
+.hero-delivery {
+  @apply absolute bottom-7 left-7 flex items-center gap-2 text-[10px] tracking-wide text-white/80 sm:left-14;
+}
+
+.hero-note {
+  @apply absolute bottom-7 right-7 hidden rounded-2xl bg-white/90 p-3 pr-5 shadow-lg backdrop-blur sm:flex sm:items-center sm:gap-3;
+}
+
+.hero-note-icon {
+  @apply grid h-10 w-10 place-items-center rounded-full bg-[#f7e7df] text-berry;
+}
+
+.hero-note-title {
+  @apply text-[11px] font-bold;
+}
+
+.hero-note-caption {
+  @apply mt-0.5 text-[10px] text-stone-500;
+}
+
+.loading-state {
+  @apply grid min-h-screen place-items-center text-sm text-stone-500;
+}

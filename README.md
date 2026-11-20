@@ -10,6 +10,10 @@ cp .env.example .env
 npm run dev
 ```
 
+## Styling
+
+Tailwind is used through `@apply` in the section stylesheets under `src/styling/`. JSX uses semantic class names, with shared page layout in `base.css` and separate files for the header, hero, catalog, footer, and overlays.
+
 For guest mode, leave `.env` empty. The cart and demo orders are stored in that browser. To enable Google accounts:
 
 1. Create a Firebase project and register a web app.

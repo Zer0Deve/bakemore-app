@@ -1,0 +1,81 @@
+/* The announcement strip and sticky header form the storefront's top navigation. */
+.app-shell {
+  @apply min-h-screen bg-cream;
+}
+
+.announcement {
+  @apply bg-ink px-4 py-2 text-center text-[11px] font-semibold tracking-[.15em] text-white sm:text-xs;
+}
+
+.announcement-mark {
+  @apply mx-2 text-amber-200;
+}
+
+.site-header {
+  @apply sticky top-0 z-30 border-b border-[#eee2d9] bg-cream/95 backdrop-blur;
+}
+
+.header-inner {
+  @apply flex h-[76px] items-center justify-between gap-5;
+}
+
+.brand {
+  @apply flex shrink-0 items-center gap-2.5 text-ink no-underline;
+}
+
+.brand-icon {
+  @apply grid h-10 w-10 place-items-center rounded-full bg-berry text-white;
+}
+
+.brand-copy {
+  @apply leading-none;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  @apply block text-2xl font-semibold tracking-[-.05em];
+}
+
+.brand-tagline {
+  @apply mt-1 block text-[9px] font-semibold uppercase tracking-[.25em] text-caramel;
+}
+
+.site-nav {
+  @apply hidden items-center gap-8 text-[13px] font-medium text-stone-600 md:flex;
+}
+
+.site-nav a {
+  @apply transition hover:text-berry;
+}
+
+.header-actions {
+  @apply flex items-center gap-2;
+}
+
+.header-search {
+  @apply hidden h-10 items-center gap-2 rounded-full border border-[#e9ded4] bg-white px-3 text-stone-400 lg:flex;
+}
+
+.header-search input {
+  @apply w-40 bg-transparent text-xs text-ink outline-none placeholder:text-stone-400;
+}
+
+.icon-button {
+  @apply grid h-10 w-10 place-items-center rounded-full text-ink transition hover:bg-blush;
+}
+
+.profile-avatar {
+  @apply h-8 w-8 rounded-full object-cover;
+}
+
+.bag-button {
+  @apply relative grid h-10 w-10 place-items-center rounded-full bg-ink text-white transition hover:bg-berry;
+}
+
+.bag-count {
+  @apply absolute -right-1 -top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-berry px-1 text-[10px] font-bold text-white;
+}
+
+.drawer-count {
+  @apply text-base text-stone-400;
+}
