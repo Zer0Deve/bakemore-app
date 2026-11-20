@@ -212,7 +212,6 @@ function App() {
   if (!authReady) {
     return <div className="grid min-h-screen place-items-center text-sm text-stone-500">Opening your bakery…</div>
   }
-
   return (
     <div className="min-h-screen bg-cream">
       <div className="bg-ink px-4 py-2 text-center text-[11px] font-semibold tracking-[.15em] text-white sm:text-xs">
@@ -229,8 +228,8 @@ function App() {
           </a>
 
           <nav className="hidden items-center gap-8 text-[13px] font-medium text-stone-600 md:flex">
-            <a className="transition hover:text-berry" href="#browse">Explore cakes</a>
-            <a className="transition hover:text-berry" href="#story">Our little story</a>
+            <a className="transition hover:text-berry" href="#browse">Find by moment</a>
+            <a className="transition hover:text-berry" href="#catalog">Browse cakes</a>
             <a className="transition hover:text-berry" href="#promise">The Bake More promise</a>
           </nav>
 
@@ -269,17 +268,9 @@ function App() {
           </div>
         </section>
 
-        <section id="story" className="page-shell grid gap-8 py-12 sm:grid-cols-[1fr_auto] sm:items-center sm:py-16">
-          <div>
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[.22em] text-berry">A slice of something lovely</p>
-            <h2 className="serif max-w-[660px] text-3xl leading-tight tracking-[-.025em] sm:text-[40px]">Thoughtful cakes for <span className="italic text-berry">beautifully ordinary</span> days.</h2>
-          </div>
-          <p className="max-w-[360px] text-sm leading-6 text-stone-500">Small-batch bakes, joyful flavours, and the kind of cake that makes everyone ask for one more slice.</p>
-        </section>
-
         <ProductCatalog search={search} onSearchChange={setSearch} onAdd={addToCart} />
 
-        <section id="promise" className="page-shell grid gap-5 py-12 sm:grid-cols-3 sm:py-16">
+        <section id="promise" className="page-shell grid gap-5 py-8 sm:grid-cols-3 sm:py-10">
           {[
             { icon: <Sparkles size={18} />, title: 'Made with the good stuff', text: 'Real ingredients, joyful recipes, and a little extra love in every layer.' },
             { icon: <Clock3 size={18} />, title: 'Fresh from our oven', text: 'Baked to order, so your cake arrives as lovely as the moment deserves.' },

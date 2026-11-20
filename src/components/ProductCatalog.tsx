@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ArrowDown, Heart, Plus, Search, SlidersHorizontal, Star, X } from 'lucide-react'
+import { ArrowDown, ChevronDown, Heart, Plus, Search, SlidersHorizontal, Star, X } from 'lucide-react'
 import { browseSections, deliveryOptions, products, type CatalogFacet } from '../data/products'
 import type { Product } from '../types'
 
@@ -78,43 +78,43 @@ function ProductCatalog({ search, onSearchChange, onAdd }: Props) {
 
   return (
     <>
-      <section id="browse" className="page-shell py-11 sm:py-14">
-        <div className="mb-7 max-w-[650px]">
-          <p className="mb-2 text-[10px] font-bold uppercase tracking-[.22em] text-berry">A shelf full of good ideas</p>
+      <section id="browse" className="page-shell py-4 sm:py-6">
+        <div className="mb-4 max-w-[650px]">
           <h2 className="serif text-3xl tracking-[-.025em] sm:text-[40px]">A cake for every kind of day</h2>
-          <p className="mt-3 text-sm leading-6 text-stone-500">Browse by the occasion, the look, or the flavour you can’t stop thinking about.</p>
         </div>
 
-        <div className="space-y-8">
+        <nav aria-label="Browse cakes by category" className="flex flex-wrap gap-2">
           {browseSections.map((section) => (
-            <div key={section.title}>
-              <div className="mb-3 flex items-center justify-between">
-                <h3 className="serif text-xl font-semibold">{section.title}</h3>
-                <span className="hidden text-[10px] text-stone-400 sm:block">Tap to explore</span>
-              </div>
-              <div className="hide-scrollbar flex gap-3 overflow-x-auto pb-2">
+            <details key={section.facet} className="group relative">
+              <summary className="flex h-10 cursor-pointer list-none items-center gap-2 rounded-full border border-[#e7dcd3] bg-white px-4 text-xs font-semibold text-stone-700 transition hover:border-berry hover:text-berry focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry">
+                {section.facet === 'occasions' ? 'Find a cake for the moment' : section.facet === 'styles' ? 'Cake style' : 'Flavour'}
+                <ChevronDown size={14} className="transition group-open:rotate-180" />
+              </summary>
+              <div className="absolute left-0 top-full z-20 mt-2 grid w-[min(580px,calc(100vw-2rem))] grid-cols-2 gap-2 rounded-2xl border border-[#eee2d9] bg-white p-3 shadow-[0_16px_40px_rgba(54,39,30,.14)] sm:grid-cols-3">
                 {section.items.map((item) => {
                   const selected = activeFacet?.facet === section.facet && activeFacet.value === item.name
                   return (
                     <button
                       key={item.name}
-                      onClick={() => chooseFacet(section.facet, item.name)}
+                      onClick={(event) => {
+                        chooseFacet(section.facet, item.name)
+                        event.currentTarget.closest('details')?.removeAttribute('open')
+                      }}
                       aria-pressed={selected}
-                      className={`group relative h-[124px] w-[142px] shrink-0 overflow-hidden rounded-2xl text-left ring-offset-2 transition focus:outline-none focus:ring-2 focus:ring-berry sm:h-[148px] sm:w-[176px] ${selected ? 'ring-2 ring-berry' : ''}`}
+                      className={`flex min-w-0 items-center gap-2 rounded-xl border p-2 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry ${selected ? 'border-berry bg-[#fbf2ee]' : 'border-transparent hover:bg-[#faf6f2]'}`}
                     >
-                      <img src={item.image} alt="" loading="lazy" onError={(event) => { event.currentTarget.src = fallbackImage }} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-                      <span className="absolute inset-0 bg-gradient-to-t from-[#211612]/80 via-[#211612]/10 to-transparent" />
-                      <span className="absolute bottom-3 left-3 right-2 text-sm font-bold text-white">{item.name}</span>
+                      <img src={item.image} alt="" loading="lazy" onError={(event) => { event.currentTarget.src = fallbackImage }} className="h-10 w-10 shrink-0 rounded-full object-cover" />
+                      <span className="truncate text-xs font-semibold text-ink">{item.name}</span>
                     </button>
                   )
                 })}
               </div>
-            </div>
+            </details>
           ))}
-        </div>
+        </nav>
       </section>
 
-      <section id="catalog" className="scroll-mt-24 bg-[#f8f2ec] py-12 sm:py-16">
+      <section id="catalog" className="scroll-mt-24 bg-[#f8f2ec] py-8 sm:py-10">
         <div className="page-shell">
           <div className="mb-7 flex flex-wrap items-end justify-between gap-5">
             <div>
