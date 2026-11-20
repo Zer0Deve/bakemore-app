@@ -1,0 +1,281 @@
+/* Drawer and notice styles are shared by account, cart, and checkout interactions. */
+.toast-notice {
+  @apply fixed bottom-5 left-1/2 z-[60] -translate-x-1/2 rounded-full bg-ink px-5 py-3 text-center text-xs font-medium text-white shadow-xl;
+}
+
+.modal-backdrop {
+  background: rgb(36 27 24 / 38%);
+  @apply fixed inset-0 z-40 flex justify-end backdrop-blur-[3px];
+}
+
+.drawer {
+  @apply flex h-full w-full max-w-[450px] flex-col bg-cream shadow-2xl;
+}
+
+.drawer-header {
+  @apply flex items-center justify-between border-b border-[#eee2d9] px-6 py-5;
+}
+
+.drawer-eyebrow {
+  @apply text-[10px] font-bold uppercase tracking-[.18em] text-berry;
+}
+
+.drawer-title {
+  font-family: 'Playfair Display', serif;
+  @apply mt-1 text-2xl;
+}
+
+.drawer-close {
+  @apply grid h-9 w-9 place-items-center rounded-full transition hover:bg-blush;
+}
+
+.drawer-scroll {
+  @apply flex-1 overflow-y-auto p-6;
+}
+
+.cart-items {
+  @apply flex-1 space-y-4 overflow-y-auto p-5;
+}
+
+.cart-item {
+  @apply flex gap-4 rounded-2xl bg-white p-3;
+}
+
+.cart-item-image {
+  @apply h-[88px] w-[88px] rounded-xl object-cover;
+}
+
+.cart-item-details {
+  @apply flex flex-1 flex-col justify-between py-1;
+}
+
+.cart-item-name {
+  font-family: 'Playfair Display', serif;
+  @apply text-[17px] font-semibold;
+}
+
+.cart-item-unit-price {
+  @apply mt-1 text-xs text-stone-500;
+}
+
+.cart-item-bottom {
+  @apply flex items-center justify-between;
+}
+
+.quantity-controls {
+  @apply flex items-center gap-3 rounded-full bg-[#f8f2ec] px-2 py-1;
+}
+
+.quantity-button {
+  @apply grid h-6 w-6 place-items-center;
+}
+
+.quantity-value {
+  @apply text-xs font-semibold;
+}
+
+.cart-item-total {
+  @apply text-sm font-bold;
+}
+
+.demo-checkout-note {
+  @apply flex items-center gap-2 rounded-xl bg-[#f4ece5] p-3 text-[11px] text-stone-600;
+}
+
+.demo-checkout-icon {
+  @apply shrink-0 text-berry;
+}
+
+.cart-summary {
+  @apply border-t border-[#eee2d9] bg-white p-6;
+}
+
+.subtotal-row {
+  @apply mb-4 flex justify-between text-sm;
+}
+
+.subtotal-label {
+  @apply text-stone-500;
+}
+
+.checkout-button {
+  @apply flex w-full items-center justify-center gap-2 rounded-full bg-berry py-4 text-sm font-bold text-white transition hover:bg-[#7c2d40] disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.checkout-caption {
+  @apply mt-3 text-center text-[10px] text-stone-400;
+}
+
+.empty-cart {
+  @apply flex flex-1 flex-col items-center justify-center px-8 text-center;
+}
+
+.empty-cart-icon,
+.account-placeholder {
+  @apply grid place-items-center rounded-full bg-[#f8e9e3] text-berry;
+}
+
+.empty-cart-icon {
+  @apply h-16 w-16;
+}
+
+.empty-cart-title {
+  font-family: 'Playfair Display', serif;
+  @apply mt-5 text-2xl;
+}
+
+.empty-cart-copy {
+  @apply mt-2 text-sm text-stone-500;
+}
+
+.dark-button {
+  @apply rounded-full bg-ink px-6 py-3 text-xs font-bold text-white;
+}
+
+.profile-card,
+.signin-card,
+.order-card,
+.empty-orders {
+  @apply rounded-2xl bg-white;
+}
+
+.profile-card {
+  @apply flex items-center gap-4 p-4;
+}
+
+.profile-avatar-large {
+  @apply h-14 w-14 rounded-full object-cover;
+}
+
+.account-placeholder {
+  @apply h-14 w-14;
+}
+
+.profile-copy {
+  @apply min-w-0;
+}
+
+.profile-name {
+  font-family: 'Playfair Display', serif;
+  @apply truncate text-xl font-semibold;
+}
+
+.profile-email {
+  @apply mt-1 truncate text-xs text-stone-500;
+}
+
+.order-heading {
+  @apply mt-8 flex items-center justify-between;
+}
+
+.order-heading-title {
+  font-family: 'Playfair Display', serif;
+  @apply text-xl;
+}
+
+.order-count {
+  @apply rounded-full bg-[#f4e5df] px-2.5 py-1 text-[10px] font-bold text-berry;
+}
+
+.order-list {
+  @apply mt-4 space-y-3;
+}
+
+.order-card {
+  @apply p-4;
+}
+
+.order-top,
+.order-total-row {
+  @apply flex justify-between gap-3;
+}
+
+.order-number {
+  @apply text-xs font-bold;
+}
+
+.order-date {
+  @apply mt-1 text-[10px] text-stone-400;
+}
+
+.order-status {
+  @apply inline-flex items-center gap-1 rounded-full bg-[#e8f4eb] px-2 py-1 text-[9px] font-bold text-[#3d7851];
+}
+
+.order-total-row {
+  @apply mt-3 border-t border-[#f2ece6] pt-3 text-[11px];
+}
+
+.order-items-count {
+  @apply text-stone-500;
+}
+
+.empty-orders {
+  @apply mt-4 px-5 py-8 text-center;
+}
+
+.empty-orders-title {
+  font-family: 'Playfair Display', serif;
+  @apply text-lg;
+}
+
+.empty-orders-copy {
+  @apply mt-1 text-xs text-stone-500;
+}
+
+.signout-button {
+  @apply mt-7 w-full rounded-full border border-[#e4d7cc] py-3 text-xs font-bold text-stone-600 hover:border-berry hover:text-berry;
+}
+
+.signin-card {
+  @apply p-6 text-center;
+}
+
+.signin-placeholder {
+  @apply mx-auto h-14 w-14;
+}
+
+.signin-title {
+  font-family: 'Playfair Display', serif;
+  @apply mt-4 text-2xl;
+}
+
+.signin-copy {
+  @apply mt-2 text-xs leading-5 text-stone-500;
+}
+
+.google-button {
+  @apply mt-6 flex w-full items-center justify-center gap-3 rounded-full bg-ink py-3.5 text-xs font-bold text-white transition hover:bg-berry disabled:cursor-not-allowed disabled:opacity-55;
+}
+
+.google-logo {
+  @apply h-4 w-4;
+}
+
+.firebase-help {
+  @apply mt-3 text-left text-[10px] leading-4 text-stone-500;
+}
+
+.firebase-help code {
+  @apply rounded bg-[#f4ece5] px-1;
+}
+
+.guest-order-note {
+  @apply mt-5 rounded-2xl border border-[#eee2d9] p-4;
+}
+
+.guest-order-title {
+  @apply text-xs font-bold;
+}
+
+.guest-order-copy {
+  @apply mt-1 text-[11px] text-stone-500;
+}
+
+@media (max-width: 639px) {
+  .browse-options {
+    left: 0;
+    max-height: min(60vh, 420px);
+    overflow-y: auto;
+  }
+}

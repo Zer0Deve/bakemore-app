@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #342820;
+  background: #fffaf5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  @apply box-border;
+}
+
+body {
+  @apply m-0 min-w-[320px];
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+::selection {
+  @apply bg-blush text-ink;
+}
+
+/* Shared page width keeps all major storefront sections aligned. */
+.page-shell {
+  width: min(1240px, calc(100% - 48px));
+  @apply mx-auto;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  @apply hidden;
+}

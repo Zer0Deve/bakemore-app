@@ -1,0 +1,286 @@
+/* Category dropdowns expose small image-and-label buttons without taking over the page. */
+.browse-section {
+  @apply py-4 sm:py-6;
+}
+
+.browse-heading {
+  font-family: 'Playfair Display', serif;
+  @apply mb-4 max-w-[650px] text-3xl tracking-[-.025em] sm:text-[40px];
+}
+
+.browse-nav {
+  @apply flex flex-wrap gap-2;
+}
+
+.browse-menu {
+  @apply relative;
+}
+
+.browse-trigger {
+  @apply flex h-10 cursor-pointer list-none items-center gap-2 rounded-full border border-[#e7dcd3] bg-white px-4 text-xs font-semibold text-stone-700 transition hover:border-berry hover:text-berry focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry;
+}
+
+.browse-chevron {
+  @apply transition;
+}
+
+.browse-menu[open] .browse-chevron {
+  @apply rotate-180;
+}
+
+.browse-options {
+  @apply absolute left-0 top-full z-20 mt-2 grid w-[min(580px,calc(100vw-2rem))] grid-cols-2 gap-2 rounded-2xl border border-[#eee2d9] bg-white p-3 shadow-[0_16px_40px_rgba(54,39,30,.14)] sm:grid-cols-3;
+}
+
+.browse-option {
+  @apply flex min-w-0 items-center gap-2 rounded-xl border border-transparent p-2 text-left transition hover:bg-[#faf6f2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry;
+}
+
+.browse-option[data-selected='true'] {
+  @apply border-berry bg-[#fbf2ee];
+}
+
+.browse-thumbnail {
+  @apply h-10 w-10 shrink-0 rounded-full object-cover;
+}
+
+.browse-option-label {
+  @apply truncate text-xs font-semibold text-ink;
+}
+
+/* The catalog section owns product discovery controls and responsive product cards. */
+.catalog-section {
+  @apply scroll-mt-24 bg-[#f8f2ec] py-8 sm:py-10;
+}
+
+.catalog-heading-row {
+  @apply mb-7 flex flex-wrap items-end justify-between gap-5;
+}
+
+.catalog-eyebrow {
+  @apply mb-2 text-[10px] font-bold uppercase tracking-[.22em] text-berry;
+}
+
+.catalog-title {
+  font-family: 'Playfair Display', serif;
+  @apply text-3xl tracking-[-.025em] sm:text-[40px];
+}
+
+.catalog-count {
+  @apply text-xs text-stone-500;
+}
+
+.catalog-search {
+  @apply mb-5 flex h-11 items-center gap-2 rounded-full border border-[#e9ded4] bg-white px-4 text-stone-400 lg:hidden;
+}
+
+.catalog-search input {
+  @apply w-full bg-transparent text-sm text-ink outline-none placeholder:text-stone-400;
+}
+
+.refine-bar {
+  @apply mb-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#eee2d9] bg-white p-3 sm:px-4;
+}
+
+.refine-title {
+  @apply flex items-center gap-2 text-xs font-semibold text-ink;
+}
+
+.refine-title-icon {
+  @apply text-berry;
+}
+
+.refine-controls {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.refine-select {
+  @apply h-9 rounded-full border border-[#eadfd6] bg-white px-3 text-[11px] text-stone-600 outline-none focus:border-berry;
+}
+
+.catalog-layout {
+  @apply grid gap-5 lg:grid-cols-[210px_1fr];
+}
+
+.filter-sidebar {
+  @apply h-fit rounded-2xl border border-[#eee2d9] bg-white p-4 lg:sticky lg:top-28;
+}
+
+.filter-sidebar-heading {
+  font-family: 'Playfair Display', serif;
+  @apply text-lg font-semibold;
+}
+
+.filter-sidebar-top {
+  @apply mb-4 flex items-center justify-between;
+}
+
+.clear-filters {
+  @apply text-[10px] font-semibold text-berry hover:underline;
+}
+
+.filter-group {
+  @apply border-t border-[#f1e9e2] py-3;
+}
+
+.filter-group-title {
+  @apply pb-2 text-[10px] font-bold uppercase tracking-[.14em] text-stone-500;
+}
+
+.filter-chips {
+  @apply flex flex-wrap gap-1.5;
+}
+
+.filter-chip {
+  @apply rounded-full bg-[#f8f2ec] px-2.5 py-1.5 text-[10px] text-stone-600 transition hover:bg-[#f1e2db];
+}
+
+.filter-chip[data-selected='true'] {
+  @apply bg-berry text-white;
+}
+
+.dietary-option {
+  @apply flex cursor-pointer items-center gap-2 text-xs text-stone-600;
+}
+
+.dietary-option input {
+  @apply accent-berry;
+}
+
+.reset-filters {
+  @apply mt-2 inline-flex items-center gap-1 text-[10px] font-semibold text-berry hover:underline;
+}
+
+.catalog-results {
+  @apply min-w-0;
+}
+
+.active-filter {
+  @apply mb-4 flex items-center justify-between rounded-xl bg-[#f2e5dd] px-4 py-3 text-xs;
+}
+
+.active-filter-clear {
+  @apply grid h-6 w-6 place-items-center rounded-full hover:bg-white/70;
+}
+
+.product-grid {
+  @apply grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3;
+}
+
+.product-card {
+  @apply overflow-hidden rounded-[18px] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_34px_rgba(74,49,38,.10)];
+}
+
+.product-image-wrap {
+  @apply relative aspect-[1.14/1] overflow-hidden bg-[#eee5dd];
+}
+
+.product-image {
+  @apply h-full w-full object-cover transition duration-500;
+}
+
+.product-card:hover .product-image {
+  @apply scale-105;
+}
+
+.product-badge {
+  @apply absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-bold text-berry shadow-sm;
+}
+
+.product-discount {
+  @apply absolute bottom-3 left-3 rounded-full bg-ink/85 px-2.5 py-1 text-[9px] font-bold text-white;
+}
+
+.favorite-button {
+  @apply absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/95 text-stone-500 transition hover:text-berry;
+}
+
+.favorite-button[data-saved='true'] {
+  @apply text-berry;
+}
+
+.product-details {
+  @apply p-3.5 sm:p-4;
+}
+
+.product-meta {
+  @apply mb-1.5 flex items-center justify-between gap-2;
+}
+
+.product-category {
+  @apply truncate text-[9px] font-bold uppercase tracking-[.14em] text-caramel;
+}
+
+.product-rating {
+  @apply flex shrink-0 items-center gap-1 text-[10px] font-semibold text-stone-500;
+}
+
+.product-name {
+  font-family: 'Playfair Display', serif;
+  @apply min-h-[25px] text-[17px] font-semibold leading-tight sm:text-[20px];
+}
+
+.product-description {
+  @apply mt-1.5 min-h-[30px] text-[10px] leading-4 text-stone-500 sm:text-[11px];
+}
+
+.product-tags {
+  @apply mt-2 flex flex-wrap gap-1;
+}
+
+.product-tag {
+  @apply rounded-full bg-[#f7f0e9] px-2 py-1 text-[9px] font-medium text-stone-500;
+}
+
+.product-tag-dietary {
+  @apply rounded-full bg-[#edf4eb] px-2 py-1 text-[9px] font-medium text-[#47714a];
+}
+
+.product-footer {
+  @apply mt-3 flex items-center justify-between gap-1;
+}
+
+.product-price {
+  @apply flex flex-wrap items-baseline gap-1.5 text-sm font-bold;
+}
+
+.product-compare-price {
+  @apply text-[10px] font-normal text-stone-400;
+}
+
+.add-to-cart-button {
+  @apply inline-flex items-center gap-1.5 rounded-full bg-[#f8eee8] px-3 py-2 text-[10px] font-bold text-berry transition hover:bg-berry hover:text-white sm:px-4 sm:text-[11px];
+}
+
+.empty-results {
+  @apply rounded-2xl bg-white px-6 py-14 text-center;
+}
+
+.empty-results-title {
+  font-family: 'Playfair Display', serif;
+  @apply text-xl;
+}
+
+.empty-results-copy {
+  @apply mt-2 text-sm text-stone-500;
+}
+
+.empty-results-button {
+  @apply mt-4 rounded-full bg-ink px-5 py-2.5 text-xs font-bold text-white;
+}
+
+.load-more-row {
+  @apply mt-8 text-center;
+}
+
+.load-more-button {
+  @apply inline-flex items-center gap-2 rounded-full border border-[#d9c9bd] bg-white px-6 py-3 text-xs font-bold transition hover:border-berry hover:text-berry;
+}
+
+.load-more-icon {
+  @apply transition;
+}
+
+.load-more-icon[data-expanded='true'] {
+  @apply rotate-180;
+}
